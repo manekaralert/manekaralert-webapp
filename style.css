@@ -197,3 +197,49 @@ button:hover{
     font-weight:500;
     color:#0B1F3A;
 }
+.pricing{
+    background:#ffffff;
+    padding:70px 20px;
+    text-align:center;
+}
+
+.pricing h2{
+    color:#0B1F3A;
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.pricing>p{
+    color:#555;
+    margin-bottom:40px;
+}
+
+.pricing-card{
+    max-width:350px;
+    margin:20px auto;
+    background:#f5f7fa;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.10);
+}
+
+.pricing-card h3{
+    color:#0B1F3A;
+    margin-bottom:20px;
+}
+
+.pricing-card p{
+    margin:12px 0;
+    color:#444;
+}
+
+.pricing-card a{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 24px;
+    background:#00A86B;
+    color:#ffffff;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    }
