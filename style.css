@@ -126,4 +126,38 @@ button:hover{
 .feature-card p{
     color:#555;
     line-height:1.6;
+}.dashboard-preview{
+    background:#0B1F3A;
+    color:#ffffff;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.dashboard-preview h2{
+    margin-bottom:20px;
+    font-size:36px;
+}
+
+.dashboard-preview p{
+    max-width:700px;
+    margin:0 auto 20px;
+    line-height:1.7;
+    font-size:18px;
+}
+
+.dashboard-box{
+    background:#ffffff;
+    color:#222222;
+    max-width:650px;
+    margin:30px auto;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    text-align:left;
+}
+
+.dashboard-box p{
+    margin:12px 0;
+    font-size:17px;
+    font-weight:500;
 }
