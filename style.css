@@ -243,3 +243,36 @@ button:hover{
     border-radius:8px;
     font-weight:bold;
     }
+.faq{
+    background:#f8fafc;
+    padding:70px 20px;
+    text-align:center;
+}
+
+.faq h2{
+    color:#0B1F3A;
+    font-size:36px;
+    margin-bottom:40px;
+}
+
+.faq-item{
+    max-width:800px;
+    margin:20px auto;
+    background:#ffffff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.10);
+    text-align:left;
+}
+
+.faq-item h3{
+    color:#0B1F3A;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.faq-item p{
+    color:#555555;
+    line-height:1.7;
+    font-size:17px;
+    }
