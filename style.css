@@ -55,4 +55,47 @@ button{
 
 button:hover{
     opacity:0.9;
+}.hero{
+    background:#0B1F3A;
+    color:#ffffff;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h2{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:0 auto 30px;
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn-primary,
+.btn-secondary{
+    display:inline-block;
+    padding:14px 28px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#00A86B;
+    color:#ffffff;
+}
+
+.btn-secondary{
+    border:2px solid #ffffff;
+    color:#ffffff;
 }
