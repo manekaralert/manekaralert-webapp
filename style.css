@@ -276,3 +276,19 @@ button:hover{
     line-height:1.7;
     font-size:17px;
     }
+footer{
+    background:#0B1F3A;
+    color:#ffffff;
+    text-align:center;
+    padding:50px 20px;
+}
+
+footer h2{
+    margin-bottom:15px;
+    font-size:30px;
+}
+
+footer p{
+    margin:10px 0;
+    line-height:1.6;
+}
