@@ -161,3 +161,39 @@ button:hover{
     font-size:17px;
     font-weight:500;
 }
+.validation{
+    background:#f5f7fa;
+    padding:70px 20px;
+    text-align:center;
+}
+
+.validation h2{
+    color:#0B1F3A;
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.validation p{
+    max-width:750px;
+    margin:0 auto 20px;
+    line-height:1.8;
+    color:#444;
+    font-size:18px;
+}
+
+.validation-box{
+    max-width:700px;
+    margin:30px auto;
+    background:#ffffff;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.10);
+    text-align:left;
+}
+
+.validation-box p{
+    margin:15px 0;
+    font-size:17px;
+    font-weight:500;
+    color:#0B1F3A;
+}
