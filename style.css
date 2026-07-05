@@ -98,4 +98,32 @@ button:hover{
 .btn-secondary{
     border:2px solid #ffffff;
     color:#ffffff;
+}.features{
+    padding:70px 20px;
+    background:#f5f7fa;
+    text-align:center;
+}
+
+.features h2{
+    margin-bottom:40px;
+    color:#0B1F3A;
+}
+
+.feature-card{
+    background:#ffffff;
+    margin:20px auto;
+    padding:25px;
+    max-width:700px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.feature-card h3{
+    color:#0B1F3A;
+    margin-bottom:10px;
+}
+
+.feature-card p{
+    color:#555;
+    line-height:1.6;
 }
