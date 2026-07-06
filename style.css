@@ -420,3 +420,46 @@ nav a:hover{
 .dashboard-box p:last-child{
     border-bottom:none;
 }
+@media (max-width:768px){
+
+nav{
+    flex-direction:column;
+    gap:15px;
+}
+
+.hero h2{
+    font-size:38px;
+}
+
+.hero p{
+    font-size:17px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+    width:100%;
+}
+
+.btn-primary,
+.btn-secondary{
+    width:90%;
+    text-align:center;
+}
+
+.stats-grid{
+    grid-template-columns:1fr;
+}
+
+.feature-card,
+.pricing-card,
+.dashboard-box,
+.validation-box,
+.faq-item{
+    max-width:100%;
+}
+
+footer{
+    padding:40px 20px;
+}
+
+}
