@@ -479,3 +479,33 @@ header h1{
     font-size:28px;
     font-weight:700;
 }
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(11,31,58,.92);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+
+header nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width:1200px;
+    margin:auto;
+    padding:15px 25px;
+}
+
+header nav a{
+    color:#ffffff;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:600;
+    transition:.3s;
+}
+
+header nav a:hover{
+    color:#00A86B;
+}
