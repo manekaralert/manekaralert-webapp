@@ -242,7 +242,25 @@ button:hover{
     text-decoration:none;
     border-radius:8px;
     font-weight:bold;
-    }
+    }.feature-card{
+    transition:all .35s ease;
+    border:1px solid rgba(0,0,0,.06);
+}
+
+.feature-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+
+.feature-card h3{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.feature-card p{
+    font-size:17px;
+    line-height:1.8;
+}
 .faq{
     background:#f8fafc;
     padding:70px 20px;
