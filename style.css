@@ -394,3 +394,29 @@ nav a:hover{
     background:#fff;
     color:#0B1F3A;
 }
+.dashboard-box{
+    background:linear-gradient(145deg,#ffffff,#f4f8fc);
+    border:1px solid rgba(0,168,107,.15);
+    border-radius:16px;
+    padding:35px;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    transition:all .35s ease;
+}
+
+.dashboard-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 28px 60px rgba(0,0,0,.18);
+}
+
+.dashboard-box p{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px solid #e8edf3;
+    font-size:18px;
+}
+
+.dashboard-box p:last-child{
+    border-bottom:none;
+}
