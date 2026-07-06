@@ -27,7 +27,9 @@ html{
         <h1 class="text-2xl font-bold tracking-wide">Manekar Alert</h1>
         <p class="text-xs text-gray-300">Rule-Based Market Intelligence for Disciplined SIP Investors</p>
     </div>
-            <button class="md:hidden text-white text-3xl">
+            <button
+    class="md:hidden text-white text-3xl"
+    onclick="toggleMenu()">
     ☰
             </button>
             <nav class="hidden md:flex gap-6 text-sm font-medium">
@@ -273,6 +275,11 @@ html{
         </div>
     </footer>
 
-</body>
+</body><script>
+function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("hidden");
+}
+</script>
                   </html>
 
