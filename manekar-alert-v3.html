@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manekar Alert - Rule-Based Market Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <header class="bg-[#0b2240] text-white sticky top-0 z-50 shadow">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Manekar Alert Logo" class="w-12 h-12">
+                <div>
+                    <h1 class="text-2xl font-bold">Manekar Alert</h1>
+                    <p class="text-xs text-gray-300">Rule-Based Market Intelligence</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="#home" class="hover:text-green-400">Home</a>
+                <a href="#validation" class="hover:text-green-400">Validation</a>
+                <a href="#pricing" class="hover:text-green-400">Pricing</a>
+                <a href="#faq" class="hover:text-green-400">FAQ</a>
+                <a href="#contact" class="hover:text-green-400">Contact</a>
+            </nav>
+
+            <button class="md:hidden text-3xl" onclick="toggleMenu()">☰</button>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-[#0b2240] border-t border-gray-700">
+            <a href="#home" class="block px-6 py-3">Home</a>
+            <a href="#validation" class="block px-6 py-3">Validation</a>
+            <a href="#pricing" class="block px-6 py-3">Pricing</a>
+            <a href="#faq" class="block px-6 py-3">FAQ</a>
+            <a href="#contact" class="block px-6 py-3">Contact</a>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="bg-[#0b2240] text-white py-20 px-6 border-t border-gray-700 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Rule-Based Market Intelligence
+            </h2>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed">
+                Manekar Alert helps disciplined SIP Investors using a transparent Rule-Based Multi-Factor Model with educational market intelligence.
+            </p>
+            <div class="flex justify-center gap-4">
+                <button class="bg-[#00a86b] hover:bg-[#008f5d] text-white font-semibold py-3 px-6 rounded transition shadow-md">
+                    Start Free
+                </button>
+                <button class="border border-white hover:bg-white hover:text-[#0b2240] text-white font-semibold py-3 px-6 rounded transition">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Validation Section -->
+    <section id="validation" class="bg-white py-16 px-6 text-center border-b border-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-[#0b2240] mb-4">Historical Validation</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-10">
+                Our Rule-Based SIP Multi-Factor Model is educational and has been evaluated across multiple historical market periods to help users understand market behaviour.
+            </p>
+
+            <div class="bg-gray-50 p-8 rounded-xl shadow-sm border border-gray-200 max-w-md mx-auto text-left">
+                <ul class="space-y-4 text-gray-700">
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 font-bold">✓</span> Historical Backtesting
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 font-bold">✓</span> Market Cycle Analysis
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 font-bold">✓</span> Rule-Based Educational Framework
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 font-bold">✓</span> Transparent Methodology
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Snapshot Section -->
+    <section class="bg-[#0b2240] py-16 px-6">
+        <div class="bg-white rounded-xl p-6 shadow-xl text-gray-900 max-w-xl mx-auto text-left">
+            
+            <h3 class="text-xl font-bold text-[#0b2240] mb-6">Today's Market Snapshot</h3>
+
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                <span>SIP Score Progress</span>
+                <span>72%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                <div class="bg-green-600 h-3 rounded-full" style="width:72%"></div>
+            </div>
+
+            <div class="flex justify-between items-center mb-5 text-sm">
+                <span class="text-gray-500">Last Updated: Today</span>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold text-xs">
+                    ● Live
+                </span>
+            </div>
+
+            <div class="flex justify-between border-b py-3 text-sm">
+                <span>SIP Score</span>
+                <strong class="text-green-600">72 / 100</strong>
+            </div>
+
+            <div class="flex justify-between border-b py-3 text-sm">
+                <span>Market Status</span>
+                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">
+                    WATCH
+                </span>
+            </div>
+
+            <div class="flex justify-between border-b py-3 text-sm">
+                <span>Market Strength</span>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
+                    STRONG
+                </span>
+            </div>
+
+            <div class="flex justify-between border-b py-3 text-sm">
+                <span>Trend</span>
+                <strong>Bullish</strong>
+            </div>
+
+            <div class="flex justify-between border-b py-3 text-sm">
+                <span>Risk Level</span>
+                <strong>Moderate</strong>
+            </div>
+
+            <div class="flex justify-between py-3 text-sm">
+                <span>Action</span>
+                <strong class="text-blue-700">Continue SIP</strong>
+            </div>
+
+            <div class="mt-6">
+                <div class="flex justify-between text-sm mb-2">
+                    <span>Model Confidence</span>
+                    <strong>91%</strong>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full" style="width:91%"></div>
+                </div>
+            </div>
+
+            <div class="mt-6 border-t pt-4">
+                <h4 class="text-sm font-bold text-gray-700 mb-3">Market Regime</h4>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                    <div class="bg-green-100 text-green-700 rounded-lg py-3">
+                        <div class="text-xs">Bull</div>
+                        <div class="font-bold">Active</div>
+                    </div>
+                    <div class="bg-yellow-100 text-yellow-700 rounded-lg py-3">
+                        <div class="text-xs">Sideways</div>
+                        <div class="font-bold">Watch</div>
+                    </div>
+                    <div class="bg-red-100 text-red-700 rounded-lg py-3">
+                        <div class="text-xs">Bear</div>
+                        <div class="font-bold">Low</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 border-t pt-4 text-sm text-gray-600">
+                <div class="flex justify-between">
+                    <span>Last Updated</span>
+                    <strong>Today</strong>
+                </div>
+                <div class="flex justify-between mt-2">
+                    <span>Model Version</span>
+                    <strong>v1.0</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-xl mx-auto mt-6 text-center">
+            <p class="text-xs text-gray-400">
+                Educational Rule-Based Market Intelligence Only. Not Investment Advice.
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="bg-gray-100 py-16 px-6 text-center">
+        <h2 class="text-3xl font-bold text-[#0b2240] mb-2">Simple Pricing</h2>
+        <p class="text-gray-600 mb-10">Choose the plan that matches your learning needs.</p>
+
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-start">
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200 text-left">
+                <h3 class="text-xl font-bold text-[#0b2240] mb-4 text-center">Free Plan</h3>
+                <ul class="space-y-3 text-sm text-gray-600 mb-6">
+                    <li><span class="text-green-600 font-bold">✓</span> Educational Content</li>
+                    <li><span class="text-green-600 font-bold">✓</span> Basic Market Updates</li>
+                    <li><span class="text-green-600 font-bold">✓</span> Historical Insights</li>
+                </ul>
+                <button class="w-full bg-[#00a86b] hover:bg-[#008f5d] text-white font-medium py-2 px-4 rounded transition">
+                    Get Started
+                </button>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200 text-left relative overflow-hidden">
+                <h3 class="text-xl font-bold text-[#0b2240] mb-4 text-center">Premium Plan</h3>
+                <ul class="space-y-3 text-sm text-gray-600 mb-6">
+                    <li><span class="text-green-600 font-bold">✓</span> Rule-Based Notifications</li>
+                    <li><span class="text-green-600 font-bold">✓</span> Advanced Dashboard</li>
+                    <li><span class="text-green-600 font-bold">✓</span> Full Historical Validation</li>
+                    <li><span class="text-green-600 font-bold">✓</span> Priority Updates</li>
+                </ul>
+                <button class="w-full bg-gray-400 text-white font-medium py-2 px-4 rounded cursor-not-allowed" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="max-w-3xl mx-auto py-16 px-6">
+        <h2 class="text-3xl font-bold text-[#0b2240] text-center mb-10">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h4 class="font-semibold text-lg text-[#0b2240] mb-2">Is Manekar Alert investment advice?</h4>
+                <p class="text-gray-600 text-sm">No. It is an educational, rule-based market information platform.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h4 class="font-semibold text-lg text-[#0b2240] mb-2">Who is this platform for?</h4>
+                <p class="text-gray-600 text-sm">It is designed for disciplined SIP investors who want condition-based market insights.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h4 class="font-semibold text-lg text-[#0b2240] mb-2">Will this guarantee returns?</h4>
+                <p class="text-gray-600 text-sm">No. Financial markets involve risk. The platform provides educational information only.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-4xl mx-auto py-16 px-6 text-center">
+        <h2 class="text-3xl font-bold text-[#0b2240] mb-6">Contact Us</h2>
+        <p class="text-gray-600 mb-8">For product updates, support and partnership enquiries.</p>
+        <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 max-w-xl mx-auto text-center text-gray-800">
+            <p class="mb-3 text-base">
+                <strong>Email:</strong> 
+                <a href="mailto:support@manekaralert.com" class="text-blue-600 hover:underline font-semibold">
+                    support@manekaralert.com
+                </a>
+            </p>
+            <p class="mb-3 text-base"><strong>Platform:</strong> Manekar Alert</p>
+            <p class="text-base"><strong>Country:</strong> India</p>
+        </div>
+    </section>
+
+    <footer class="bg-[#0b2240] text-gray-400 py-6 text-center text-xs border-t border-gray-800">
+        <div class="space-y-2">
+            <p><strong>Manekar Alert</strong></p>
+            <p>Educational Rule-Based Market Intelligence Platform</p>
+            <p>This platform is for educational purposes only and does not provide investment advice.</p>
+            <p>&copy; 2026 Manekar Alert. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("hidden");
+        }
+    </script>
+</body>
+
+</html>
