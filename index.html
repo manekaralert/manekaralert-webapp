@@ -13,33 +13,6 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0b2240">
 
-    <link rel="canonical" href="https://manekaralert-webapp.vercel.app/">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://manekaralert-webapp.vercel.app/">
-    <meta property="og:title" content="Manekar Alert - Rule-Based Market Intelligence">
-    <meta property="og:description" content="Educational Rule-Based Market Intelligence Platform for disciplined SIP Investors.">
-    <meta property="og:image" content="https://manekaralert-webapp.vercel.app/logo.png">
-    <meta property="og:site_name" content="Manekar Alert">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Manekar Alert",
-      "url": "https://manekaralert-webapp.vercel.app/",
-      "description": "Educational Rule-Based Market Intelligence Platform for disciplined SIP Investors.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Manekar Alert",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://manekaralert-webapp.vercel.app/logo.png"
-        }
-      }
-    }
-    </script>
-
     <link class="favicon-node" rel="icon" type="image/png" href="/logo.png">
     <link rel="apple-touch-icon" href="/logo.png">
 
@@ -69,20 +42,8 @@
                 <a href="#validation" class="hover:text-green-400 transition duration-300">Validation</a>
                 <a href="#snapshot" class="hover:text-green-400 transition duration-300">Snapshot</a>
                 <a href="#pricing" class="hover:text-green-400 transition duration-300">Pricing</a>
-                <a href="#faq" class="hover:text-green-400 transition duration-300">FAQ</a>
                 <button onclick="toggleModal('loginModal', true)" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm font-bold transition duration-300 uppercase tracking-wide">Investor Login</button>
             </nav>
-            <button class="md:hidden text-3xl hover:text-green-400 transition duration-300" onclick="toggleMenu()">
-                ☰
-            </button>
-        </div>
-        <div id="mobileMenu" class="hidden md:hidden bg-[#081a33] border-t border-gray-800">
-            <a href="#home" class="block px-6 py-3 hover:bg-[#102c52]">Home</a>
-            <a href="#calculator-section" class="block px-6 py-3 hover:bg-[#102c52]">Hybrid Calculator</a>
-            <a href="#validation" class="block px-6 py-3 hover:bg-[#102c52]">Validation</a>
-            <a href="#snapshot" class="block px-6 py-3 hover:bg-[#102c52]">Snapshot</a>
-            <a href="#pricing" class="block px-6 py-3 hover:bg-[#102c52]">Pricing</a>
-            <button onclick="toggleModal('loginModal', true); toggleMenu();" class="w-full text-left block px-6 py-3 bg-blue-700 text-white font-bold">Investor Login</button>
         </div>
     </header>
 
@@ -184,17 +145,6 @@
                         <strong id="out-bracket" class="text-base text-yellow-500 font-bold">NEUTRAL</strong>
                     </div>
                 </div>
-
-                <div class="space-y-2 text-xs pt-2 border-t border-gray-800/60">
-                    <div class="flex justify-between py-1">
-                        <span class="text-gray-400">Rule-Based O2 Score Matrix</span>
-                        <span id="out-score" class="font-bold text-emerald-400 font-mono">50%</span>
-                    </div>
-                    <div class="flex justify-between py-1">
-                        <span class="text-gray-400">Statistical Model Multiplier</span>
-                        <span id="out-mult" class="font-bold text-white font-mono">1.0x Base Amount</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -211,35 +161,17 @@
                         <span class="text-emerald-400 font-bold block text-[10px] mb-1">ROUTE: INDIA (WhatsApp Hub)</span>
                         "Auto-sync enabled. System active for EOD 18:00 IST calculation pushes."
                     </div>
-                    <div class="p-3 bg-purple-950/20 border border-purple-900/30 rounded-xl">
-                        <span class="text-purple-400 font-bold block text-[10px] mb-1">ROUTE: INT'L (Secure Email)</span>
-                        "International mail routing lines standing by for EOD status updates."
-                    </div>
                 </div>
             </div>
-            <p class="text-[10px] text-gray-500 text-center mt-4">Daily Cron Trigger Schedule: 18:00 IST Fixed Window</p>
         </div>
     </section>
 
     <section id="validation" class="max-w-5xl mx-auto py-16 px-6 text-center scroll-mt-20">
         <h2 class="text-4xl font-bold mb-5">Historical Validation</h2>
-        <p class="text-gray-400 max-w-3xl mx-auto mb-12">
-            Our Rule-Based SIP Multi-Factor Model has been evaluated across multiple historical market periods for educational purposes.
-        </p>
         <div class="bg-[#081a33] border border-gray-800 rounded-xl p-8 shadow-lg max-w-md mx-auto text-left">
             <ul class="space-y-4 text-gray-300">
-                <li class="flex items-center gap-3">
-                    <span class="text-green-500 font-bold text-lg">✓</span> Historical Backtesting
-                </li>
-                <li class="flex items-center gap-3">
-                    <span class="text-green-500 font-bold text-lg">✓</span> Market Cycle Analysis
-                </li>
-                <li class="flex items-center gap-3">
-                    <span class="text-green-500 font-bold text-lg">✓</span> Rule-Based Educational Framework
-                </li>
-                <li class="flex items-center gap-3">
-                    <span class="text-green-500 font-bold text-lg">✓</span> Transparent Methodology
-                </li>
+                <li class="flex items-center gap-3"><span class="text-green-500 font-bold">✓</span> Historical Backtesting</li>
+                <li class="flex items-center gap-3"><span class="text-green-500 font-bold">✓</span> Market Cycle Analysis</li>
             </ul>
         </div>
     </section>
@@ -247,64 +179,80 @@
     <section id="snapshot" class="max-w-2xl mx-auto py-16 px-6 scroll-mt-20">
         <div class="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
             <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Live Market Snapshot</h3>
-            
-            <div class="flex justify-between mb-3 text-sm font-medium text-gray-700">
-                <span>SIP Score</span>
-                <strong id="snap-score" class="text-green-600 text-lg">50%</strong>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-3 mb-6">
-                <div id="snap-progress" class="bg-green-600 h-3 rounded-full" style="width:50%"></div>
-            </div>
-
-            <div class="flex justify-between border-b py-3 text-sm">
-                <span class="text-gray-600">Market Status (Signal)</span>
-                <strong id="snap-bracket" class="text-gray-800 font-bold">NEUTRAL</strong>
-            </div>
-            <div class="flex justify-between border-b py-3 text-sm">
-                <span class="text-gray-600">Model Multiplier</span>
-                <strong id="snap-mult" class="text-gray-800">1.0x Base Amount</strong>
-            </div>
             <div class="flex justify-between border-b py-3 text-sm">
                 <span class="text-gray-600">Current Drawdown</span>
                 <strong id="snap-drawdown" class="text-gray-800 font-mono">0.00%</strong>
-            </div>
-            <div class="flex justify-between py-3 text-sm">
-                <span class="text-gray-600">System Action</span>
-                <strong id="snap-action" class="text-blue-700 text-lg">Standard Running Mode</strong>
             </div>
         </div>
     </section>
 
     <section id="pricing" class="py-16 px-6 scroll-mt-20">
         <h2 class="text-4xl font-bold text-center mb-2">Simple Pricing Architecture</h2>
-        <p class="text-center text-xs text-gray-400 uppercase tracking-widest mb-10 font-mono">Running Calendar Cycle: 2026</p>
-        
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-b from-[#082238] to-[#081a33] rounded-xl border border-emerald-800/40 p-8 shadow-lg flex flex-col justify-between">
-                <div>
-                    <h3 class="text-2xl font-bold mb-6 text-center text-emerald-400">Free Vault</h3>
-                    <ul class="space-y-4 text-xs">
-                        <li class="flex items-center justify-between p-2.5 bg-emerald-950/40 rounded border border-emerald-900/30 text-emerald-200">
-                            <span>✓ 2021 - 2025 Historical Dataset</span>
-                            <span class="text-[9px] bg-emerald-900 px-2 py-0.5 rounded font-mono font-bold">UNLOCKED</span>
-                        </li>
-                        <li class="flex items-center justify-between text-gray-500 line-through bg-red-950/10 p-2.5 rounded border border-red-900/10">
-                            <span>🔒 2020 Deep Market Cycle Sheet</span>
-                            <span class="text-[9px] bg-red-900/40 text-red-400 px-2 py-0.5 rounded font-mono font-bold">ROLLED OUT</span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="#calculator-section" class="w-full text-center mt-8 bg-[#00a86b] hover:bg-[#009f64] py-3 rounded-lg font-bold transition">Launch Sandbox</a>
+            <div class="bg-gradient-to-b from-[#082238] to-[#081a33] rounded-xl border border-emerald-800/40 p-8 shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center text-emerald-400">Free Vault</h3>
             </div>
+            <div class="bg-gradient-to-b from-[#0a254a] to-[#081a33] rounded-xl border-2 border-blue-500 p-8 shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center text-blue-400">Premium Real-Time Node</h3>
+            </div>
+        </div>
+    </section>
 
-            <div class="bg-gradient-to-b from-[#0a254a] to-[#081a33] rounded-xl border-2 border-blue-500 p-8 shadow-lg flex flex-col justify-between">
-                <div>
-                    <h3 class="text-2xl font-bold mb-6 text-center text-blue-400">Premium Real-Time Node</h3>
-                    <ul class="space-y-4 text-xs">
-                        <li class="text-white font-medium p-2.5 bg-blue-950/50 rounded border border-blue-900/30 flex justify-between items-center">
-                            <span>🚀 2026 Live Running Automation Layer</span>
-                            <span class="text-[8px] bg-blue-500 px-1.5 py-0.5 rounded font-bold uppercase">Live API</span>
-                        </li>
-                        <li class="flex items-center gap-2 text-amber-400">
-                            <span class="text-blue-500 font-bold">✓</span> Real-Time WhatsApp (India) & Mail (Int'l) Push
-             
+    <footer class="bg-[#051426] border-t border-gray-900 py-8 px-6 text-center text-xs text-gray-500">
+        <p>&copy; 2026 Manekar Alert. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleModal(modalId, show) {
+            const modal = document.getElementById(modalId);
+            if (show) { modal.classList.remove('ghost-hidden'); } 
+            else { modal.classList.add('ghost-hidden'); }
+        }
+
+        // 🟢 मोंगोडीबी से लाइव कनेक्टेड सिक्योर लॉगिन फंक्शन
+        async function executeSecureLogin(event) {
+            event.preventDefault(); 
+            
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            
+            submitBtn.innerText = "Verifying Credentials...";
+            submitBtn.disabled = true;
+
+            try {
+                // हमारे वर्सेल सर्वरलेस फंक्शन (MongoDB API) से संपर्क
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: pass })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert("स्वागत है मानेकर अलर्ट प्लेटफॉर्म पर! " + data.message);
+                    toggleModal('loginModal', false); 
+                    document.getElementById('home').scrollIntoView();
+                } else {
+                    alert("अड़चन: " + data.message);
+                }
+            } catch (error) {
+                alert("कनेक्शन एरर: डेटाबेस एपीआई अभी सक्रिय नहीं है।");
+            } finally {
+                submitBtn.innerText = "Verify & Request Access";
+                submitBtn.disabled = false;
+            }
+        }
+
+        function sendToGhostBackend() {
+            const high = parseFloat(document.getElementById('high-val').value);
+            const close = parseFloat(document.getElementById('close-val').value);
+            if (isNaN(high) || isNaN(close) || high <= 0) return;
+            
+            const drawdown = ((high - close) / high) * 100;
+            document.getElementById('out-drawdown').innerText = drawdown.toFixed(2) + "%";
+        }
+    </script>
+</body>
+</html>
