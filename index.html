@@ -176,12 +176,44 @@
         </div>
     </section>
 
+    <!-- 🎯 टुडे लाइव मार्केट स्नैपशॉट (आपका ओरिजिनल डिज़ाइन - लाइव डेटा से जुड़ा हुआ) -->
     <section id="snapshot" class="max-w-2xl mx-auto py-16 px-6 scroll-mt-20">
         <div class="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
             <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Live Market Snapshot</h3>
-            <div class="flex justify-between border-b py-3 text-sm">
-                <span class="text-gray-600">Current Drawdown</span>
-                <strong id="snap-drawdown" class="text-gray-800 font-mono">0.00%</strong>
+            
+            <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-xs font-bold text-gray-600">
+                    <span>SIP Score</span>
+                    <span id="snap-sip-score">--</span>
+                </div>
+                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                    <div id="snap-progress-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="divide-y divide-gray-100">
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Market Status (Signal)</span>
+                    <strong id="snap-market-status" class="text-gray-800">Loading...</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Model Multiplier</span>
+                    <strong id="snap-multiplier" class="text-gray-800">Loading...</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Current Drawdown</span>
+                    <strong id="snap-drawdown" class="text-gray-800 font-mono">Loading...</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">System Action</span>
+                    <strong id="snap-action" class="text-blue-600">Loading...</strong>
+                </div>
+            </div>
+
+            <div class="text-center pt-4 border-t border-gray-100 mt-4">
+                <span class="text-[10px] text-gray-400 bg-gray-50 px-2 py-1 rounded">
+                    🕒 Last Updated: <span id="snap-time" class="font-mono">--</span>
+                </span>
             </div>
         </div>
     </section>
@@ -221,7 +253,6 @@
             submitBtn.disabled = true;
 
             try {
-                // हमारे वर्सेल सर्वरलेस फंक्शन (MongoDB API) से संपर्क
                 const response = await fetch('/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -252,7 +283,52 @@
             
             const drawdown = ((high - close) / high) * 100;
             document.getElementById('out-drawdown').innerText = drawdown.toFixed(2) + "%";
+            
+            let bracket = "NEUTRAL";
+            if (drawdown > 5 && drawdown <= 10) bracket = "ACCUMULATE";
+            else if (drawdown > 10) bracket = "AGGRESSIVE BUY";
+            else if (drawdown < 0) bracket = "OVERVALUED";
+            
+            document.getElementById('out-bracket').innerText = bracket;
         }
+
+        // 🚀 नया सुरक्षित फंक्शन: बैकएंड (api/get-snapshot.js) से लाइव निफ्टी भाव और सीक्रेट स्कोर लाना
+        async function fetchLiveSnapshot() {
+            try {
+                const response = await fetch('/api/get-snapshot');
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    const data = result.data;
+
+                    // आपके डिज़ाइन के बॉक्स में लाइव डेटा डालना
+                    document.getElementById('snap-sip-score').innerText = data.o2Score;
+                    document.getElementById('snap-progress-bar').style.width = data.o2Score;
+                    document.getElementById('snap-market-status').innerText = data.marketStatus;
+                    document.getElementById('snap-multiplier').innerText = data.modelMultiplier;
+                    document.getElementById('snap-drawdown').innerText = data.currentDrawdown;
+                    document.getElementById('snap-action').innerText = data.action;
+                    document.getElementById('snap-time').innerText = data.lastUpdated;
+                } else {
+                    showErrorSnapshot();
+                }
+            } catch (error) {
+                console.error("Snapshot Fetching Error:", error);
+                showErrorSnapshot();
+            }
+        }
+
+        function showErrorSnapshot() {
+            document.getElementById('snap-market-status').innerText = "OFFLINE";
+            document.getElementById('snap-multiplier').innerText = "1.0x Base";
+            document.getElementById('snap-action').innerText = "Syncing...";
+        }
+
+        // पेज खुलते ही कैलकुलेटर सेट करना और बैकएंड से लाइव डेटा लाना
+        document.addEventListener('DOMContentLoaded', () => {
+            sendToGhostBackend();
+            fetchLiveSnapshot(); 
+        });
     </script>
 </body>
 </html>
