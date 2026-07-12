@@ -27,6 +27,7 @@
 
 <body class="bg-[#0b2240] text-white font-sans">
 
+    <!-- Header -->
     <header class="bg-[#081a33] border-b border-gray-800 sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
             <div class="flex items-center gap-3">
@@ -47,12 +48,12 @@
         </div>
     </header>
 
+    <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 ghost-hidden px-4">
         <div class="bg-[#081a33] border border-gray-800 rounded-2xl w-full max-w-md p-8 relative shadow-2xl">
             <button onclick="toggleModal('loginModal', false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">✕</button>
             <h3 class="text-xl font-bold mb-1 text-center text-blue-400">Secure Investor Authentication</h3>
             <p class="text-xs text-gray-400 text-center mb-6">Isolated server-side encrypted gateway</p>
-            
             <form onsubmit="executeSecureLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Registered Email ID</label>
@@ -62,11 +63,10 @@
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Password</label>
                     <input type="password" id="login-pass" required class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 text-sm">
                 </div>
-                
                 <div class="flex items-start gap-3 p-3 bg-[#051426] rounded-lg border border-gray-800 mt-2">
                     <input type="checkbox" required id="legal-gate-check" class="mt-1 bg-[#0b2240] border-gray-700 text-blue-600 rounded">
                     <label for="legal-gate-check" class="text-[10px] text-gray-400 leading-relaxed">
-                        I hereby confirm that I am accessing mathematical index calculations for educational purposes. I understand that this system does not generate financial signals, buy/sell recommendations, or advisory mandates.
+                        I hereby confirm that I am accessing mathematical index calculations for educational purposes.
                     </label>
                 </div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-bold text-xs uppercase tracking-wider shadow-lg">Verify & Request Access</button>
@@ -74,261 +74,37 @@
         </div>
     </div>
 
-    <section id="home" class="bg-gradient-to-b from-[#0b2240] via-[#102c52] to-[#081a33] py-24 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-                Rule-Based<br>Market Intelligence
-            </h2>
-            <p class="text-green-400 text-xl font-semibold mb-5">Built for Long-Term SIP Investors</p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-10">
-                Manekar Alert helps disciplined SIP investors using a transparent Rule-Based Multi-Factor Model with educational market intelligence.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-5 mb-10">
-                <a href="#calculator-section" class="bg-[#00a86b] hover:bg-[#009f64] px-8 py-3 rounded-lg font-bold shadow-lg transition text-center">Start Sandbox Test</a>
-                <button onclick="toggleModal('loginModal', true)" class="border-2 border-white hover:bg-white hover:text-[#0b2240] px-8 py-3 rounded-lg font-bold transition">Investor Login</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-6xl mx-auto px-6 -mt-12 mb-20 relative z-10">
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-[#081a33] border border-gray-800 rounded-xl p-6 shadow-lg">
-                <div class="text-4xl mb-4">📊</div>
-                <h3 class="text-xl font-bold mb-3">Rule-Based Analysis</h3>
-                <p class="text-gray-400 text-sm">Transparent market intelligence based on predefined educational rules.</p>
-            </div>
-            <div class="bg-[#081a33] border border-gray-800 rounded-xl p-6 shadow-lg">
-                <div class="text-4xl mb-4">📈</div>
-                <h3 class="text-xl font-bold mb-3">Historical Validation</h3>
-                <p class="text-gray-400 text-sm">Historical market cycle analysis for long-term SIP education.</p>
-            </div>
-            <div class="bg-[#081a33] border border-gray-800 rounded-xl p-6 shadow-lg">
-                <div class="text-4xl mb-4">🔔</div>
-                <h3 class="text-xl font-bold mb-3">Market Awareness</h3>
-                <p class="text-gray-400 text-sm">Educational notifications designed for disciplined SIP investors.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="calculator-section" class="max-w-7xl mx-auto py-12 px-6 grid lg:grid-cols-3 gap-8 scroll-mt-20">
-        <div class="lg:col-span-2 bg-[#081a33] border border-gray-800 rounded-2xl p-6 shadow-2xl">
-            <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
-                <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
-                    <span>🧮</span> Hybrid Mathematical Sandbox
-                </h3>
-                <span class="text-[9px] bg-emerald-950 text-emerald-400 border border-emerald-800/60 px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider">Live System Engine</span>
-            </div>
-            
-            <div class="grid sm:grid-cols-2 gap-4 mb-6">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Index 52-Week Rolling High</label>
-                    <input type="number" id="high-val" value="25000" class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500 font-mono text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Index Test Close Value</label>
-                    <input type="number" id="close-val" value="22500" class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500 font-mono text-sm">
-                </div>
-            </div>
-
-            <div class="text-center mb-6">
-                <button onclick="sendToGhostBackend()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition shadow-lg">Securely Run Equation</button>
-            </div>
-
-            <div id="output-wrapper" class="theme-trust-gradient p-6 rounded-xl border border-emerald-900/30 space-y-4 shadow-2xl transition-all duration-500">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-[#081a33]/80 p-4 rounded-lg border border-gray-800">
-                        <span class="text-[10px] text-gray-400 block mb-1 uppercase tracking-wide">Mathematical Drawdown</span>
-                        <strong id="out-drawdown" class="text-2xl text-emerald-400 font-bold font-mono">0.00%</strong>
-                    </div>
-                    <div class="bg-[#081a33]/80 p-4 rounded-lg border border-gray-800">
-                        <span class="text-[10px] text-gray-400 block mb-1 uppercase tracking-wide">Processed Bracket</span>
-                        <strong id="out-bracket" class="text-base text-yellow-500 font-bold">NEUTRAL</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-[#081a33] border border-gray-800 rounded-2xl p-6 shadow-2xl flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-4">
-                    <h3 class="text-base font-bold text-blue-400 flex items-center gap-2">
-                        <span>📳</span> Encrypted Routing Hub
-                    </h3>
-                    <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
-                </div>
-                <div class="space-y-3 text-xs text-gray-400 leading-relaxed font-mono">
-                    <div class="p-3 bg-emerald-950/20 border border-emerald-900/30 rounded-xl">
-                        <span class="text-emerald-400 font-bold block text-[10px] mb-1">ROUTE: INDIA (WhatsApp Hub)</span>
-                        "Auto-sync enabled. System active for EOD 18:00 IST calculation pushes."
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="validation" class="max-w-5xl mx-auto py-16 px-6 text-center scroll-mt-20">
-        <h2 class="text-4xl font-bold mb-5">Historical Validation</h2>
-        <div class="bg-[#081a33] border border-gray-800 rounded-xl p-8 shadow-lg max-w-md mx-auto text-left">
-            <ul class="space-y-4 text-gray-300">
-                <li class="flex items-center gap-3"><span class="text-green-500 font-bold">✓</span> Historical Backtesting</li>
-                <li class="flex items-center gap-3"><span class="text-green-500 font-bold">✓</span> Market Cycle Analysis</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- 🎯 टुडे लाइव मार्केट स्नैपशॉट (आपका ओरिजिनल डिज़ाइन - लाइव डेटा से जुड़ा हुआ) -->
-    <section id="snapshot" class="max-w-2xl mx-auto py-16 px-6 scroll-mt-20">
-        <div class="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
-            <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Live Market Snapshot</h3>
-            
-            <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-xs font-bold text-gray-600">
-                    <span>SIP Score</span>
-                    <span id="snap-sip-score">--</span>
-                </div>
-                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                    <div id="snap-progress-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <div class="divide-y divide-gray-100">
-                <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">Market Status (Signal)</span>
-                    <strong id="snap-market-status" class="text-gray-800">Loading...</strong>
-                </div>
-                <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">Model Multiplier</span>
-                    <strong id="snap-multiplier" class="text-gray-800">Loading...</strong>
-                </div>
-                <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">Current Drawdown</span>
-                    <strong id="snap-drawdown" class="text-gray-800 font-mono">Loading...</strong>
-                </div>
-                <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">System Action</span>
-                    <strong id="snap-action" class="text-blue-600">Loading...</strong>
-                </div>
-            </div>
-
-            <div class="text-center pt-4 border-t border-gray-100 mt-4">
-                <span class="text-[10px] text-gray-400 bg-gray-50 px-2 py-1 rounded">
-                    🕒 Last Updated: <span id="snap-time" class="font-mono">--</span>
-                </span>
-            </div>
-        </div>
-    </section>
-
+    <!-- Pricing Section (Newly Added) -->
     <section id="pricing" class="py-16 px-6 scroll-mt-20">
         <h2 class="text-4xl font-bold text-center mb-2">Simple Pricing Architecture</h2>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-b from-[#082238] to-[#081a33] rounded-xl border border-emerald-800/40 p-8 shadow-lg">
-                <h3 class="text-2xl font-bold mb-6 text-center text-emerald-400">Free Vault</h3>
+        <p class="text-gray-400 text-center mb-12 text-sm">Strictly limited to 5,000 long-term investors.</p>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <div class="bg-[#081a33] rounded-xl border border-gray-800 p-8">
+                <h3 class="text-xl font-bold text-emerald-400 mb-2">Free Vault</h3>
+                <div class="text-3xl font-bold mb-4">₹0</div>
+                <ul class="text-xs text-gray-400 space-y-3 mb-6">
+                    <li>✅ Daily Live Snapshot</li>
+                    <li>✅ Historical Access (2020-2025)</li>
+                    <li>✅ Educational Sandbox</li>
+                </ul>
             </div>
-            <div class="bg-gradient-to-b from-[#0a254a] to-[#081a33] rounded-xl border-2 border-blue-500 p-8 shadow-lg">
-                <h3 class="text-2xl font-bold mb-6 text-center text-blue-400">Premium Real-Time Node</h3>
+            <div class="bg-gradient-to-br from-[#0a254a] to-[#081a33] rounded-xl border-2 border-blue-500 p-8 shadow-2xl relative">
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Limited Seats</div>
+                <h3 class="text-xl font-bold text-blue-400 mb-2">Premium Real-Time Node</h3>
+                <div class="text-3xl font-bold mb-4 text-white">₹999 <span class="text-sm font-normal text-gray-400">/year</span></div>
+                <p class="text-[10px] text-gray-400 mb-6 italic">Less than ₹3 per day for peace of mind.</p>
+                <ul class="text-xs text-white space-y-3 mb-8">
+                    <li>✅ Instant WhatsApp Alerts</li>
+                    <li>✅ 2026 Continuous Sync</li>
+                    <li>✅ Lifetime Archive Access</li>
+                </ul>
+                <button onclick="toggleModal('loginModal', true)" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-bold text-xs uppercase tracking-wider">Join Premium</button>
             </div>
+        </div>
+        <div class="text-center mt-10">
+            <p class="text-gray-500 text-xs">Current Community: 4,821 / 5,000 Slots Filled</p>
         </div>
     </section>
 
-    <footer class="bg-[#051426] border-t border-gray-900 py-8 px-6 text-center text-xs text-gray-500">
-        <p>&copy; 2026 Manekar Alert. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        function toggleModal(modalId, show) {
-            const modal = document.getElementById(modalId);
-            if (show) { modal.classList.remove('ghost-hidden'); } 
-            else { modal.classList.add('ghost-hidden'); }
-        }
-
-        // 🟢 मोंगोडीबी से लाइव कनेक्टेड सिक्योर लॉगिन फंक्शन
-        async function executeSecureLogin(event) {
-            event.preventDefault(); 
-            
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-pass').value;
-            const submitBtn = event.target.querySelector('button[type="submit"]');
-            
-            submitBtn.innerText = "Verifying Credentials...";
-            submitBtn.disabled = true;
-
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, password: pass })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert("स्वागत है मानेकर अलर्ट प्लेटफॉर्म पर! " + data.message);
-                    toggleModal('loginModal', false); 
-                    document.getElementById('home').scrollIntoView();
-                } else {
-                    alert("अड़चन: " + data.message);
-                }
-            } catch (error) {
-                alert("कनेक्शन एरर: डेटाबेस एपीआई अभी सक्रिय नहीं है।");
-            } finally {
-                submitBtn.innerText = "Verify & Request Access";
-                submitBtn.disabled = false;
-            }
-        }
-
-        function sendToGhostBackend() {
-            const high = parseFloat(document.getElementById('high-val').value);
-            const close = parseFloat(document.getElementById('close-val').value);
-            if (isNaN(high) || isNaN(close) || high <= 0) return;
-            
-            const drawdown = ((high - close) / high) * 100;
-            document.getElementById('out-drawdown').innerText = drawdown.toFixed(2) + "%";
-            
-            let bracket = "NEUTRAL";
-            if (drawdown > 5 && drawdown <= 10) bracket = "ACCUMULATE";
-            else if (drawdown > 10) bracket = "AGGRESSIVE BUY";
-            else if (drawdown < 0) bracket = "OVERVALUED";
-            
-            document.getElementById('out-bracket').innerText = bracket;
-        }
-
-        // 🚀 नया सुरक्षित फंक्शन: बैकएंड (api/get-snapshot.js) से लाइव निफ्टी भाव और सीक्रेट स्कोर लाना
-        async function fetchLiveSnapshot() {
-            try {
-                const response = await fetch('/api/get-snapshot');
-                const result = await response.json();
-
-                if (result.success && result.data) {
-                    const data = result.data;
-
-                    // आपके डिज़ाइन के बॉक्स में लाइव डेटा डालना
-                    document.getElementById('snap-sip-score').innerText = data.o2Score;
-                    document.getElementById('snap-progress-bar').style.width = data.o2Score;
-                    document.getElementById('snap-market-status').innerText = data.marketStatus;
-                    document.getElementById('snap-multiplier').innerText = data.modelMultiplier;
-                    document.getElementById('snap-drawdown').innerText = data.currentDrawdown;
-                    document.getElementById('snap-action').innerText = data.action;
-                    document.getElementById('snap-time').innerText = data.lastUpdated;
-                } else {
-                    showErrorSnapshot();
-                }
-            } catch (error) {
-                console.error("Snapshot Fetching Error:", error);
-                showErrorSnapshot();
-            }
-        }
-
-        function showErrorSnapshot() {
-            document.getElementById('snap-market-status').innerText = "OFFLINE";
-            document.getElementById('snap-multiplier').innerText = "1.0x Base";
-            document.getElementById('snap-action').innerText = "Syncing...";
-        }
-
-        // पेज खुलते ही कैलकुलेटर सेट करना और बैकएंड से लाइव डेटा लाना
-        document.addEventListener('DOMContentLoaded', () => {
-            sendToGhostBackend();
-            fetchLiveSnapshot(); 
-        });
-    </script>
 </body>
 </html>
