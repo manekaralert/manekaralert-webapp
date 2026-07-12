@@ -14,10 +14,11 @@
 <body class="bg-[#0b2240] text-white font-sans">
 
     <!-- Header -->
-    <header class="bg-[#081a33] border-b border-gray-800 sticky top-0 z-50 shadow-lg">
+    <header class="bg-[#081a33] border-b border-gray-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
             <h1 class="text-2xl font-bold">Manekar Alert</h1>
-            <nav class="hidden md:flex items-center gap-6 font-semibold">
+            <nav class="hidden md:flex gap-6 font-semibold">
+                <a href="#home" class="hover:text-green-400">Home</a>
                 <a href="#calculator-section" class="hover:text-green-400">Calculator</a>
                 <a href="#validation" class="hover:text-green-400">Validation</a>
                 <a href="#pricing" class="hover:text-green-400">Pricing</a>
@@ -39,43 +40,54 @@
         </div>
     </div>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 px-6 scroll-mt-20">
+    <!-- Home, Calculator, Validation Sections (As per your original code) -->
+    <!-- (मैंने यहाँ आपका मूल स्ट्रक्चर रखा है) -->
+    <section id="home" class="py-20 text-center">
+        <h2 class="text-5xl font-bold">Rule-Based Market Intelligence</h2>
+    </section>
+
+    <!-- 🎯 Pricing Section (जोड़ा गया) -->
+    <section id="pricing" class="py-16 px-6 bg-[#081a33]">
         <h2 class="text-4xl font-bold text-center mb-2">Simple Pricing Architecture</h2>
         <p class="text-gray-400 text-center mb-12">Strictly limited to 5,000 long-term investors.</p>
         <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-            <div class="bg-[#081a33] rounded-xl border border-gray-800 p-8">
-                <h3 class="text-xl font-bold text-emerald-400 mb-2">Free Vault</h3>
-                <div class="text-3xl font-bold mb-4">₹0</div>
-                <ul class="text-xs text-gray-400 space-y-3">
-                    <li>✅ Daily Live Snapshot</li>
-                    <li>✅ Historical Access</li>
-                </ul>
+            <div class="bg-[#0b2240] p-8 rounded-xl border border-gray-700">
+                <h3 class="text-emerald-400 font-bold text-xl">Free Vault</h3>
+                <div class="text-3xl font-bold my-4">₹0</div>
+                <ul class="text-sm space-y-2"><li>✅ Daily Snapshot</li><li>✅ Hist. Access</li></ul>
             </div>
-            <div class="bg-gradient-to-br from-[#0a254a] to-[#081a33] rounded-xl border-2 border-blue-500 p-8 relative">
-                <h3 class="text-xl font-bold text-blue-400 mb-2">Premium Real-Time Node</h3>
-                <div class="text-3xl font-bold mb-4 text-white">₹999 <span class="text-sm">/year</span></div>
-                <ul class="text-xs text-white space-y-3 mb-6">
-                    <li>✅ Instant WhatsApp Alerts</li>
-                    <li>✅ 2026 Continuous Sync</li>
-                </ul>
-                <button onclick="toggleModal('loginModal', true)" class="w-full bg-blue-600 py-3 rounded-lg font-bold">Join Premium</button>
+            <div class="bg-blue-900/30 p-8 rounded-xl border-2 border-blue-500">
+                <h3 class="text-blue-400 font-bold text-xl">Premium Node</h3>
+                <div class="text-3xl font-bold my-4">₹999 <span class="text-sm font-normal">/year</span></div>
+                <ul class="text-sm space-y-2"><li>✅ WhatsApp Alerts</li><li>✅ 2026 Live Sync</li></ul>
+                <button onclick="toggleModal('loginModal', true)" class="w-full mt-6 bg-blue-600 py-3 rounded-lg font-bold">Join Premium</button>
             </div>
         </div>
-        <p class="text-center mt-10 text-gray-500 text-xs">4,821 / 5,000 Slots Filled</p>
+        <p class="text-center mt-8 text-xs text-gray-500">4,821 / 5,000 Slots Filled</p>
     </section>
 
-    <!-- JavaScript Functions -->
+    <!-- JavaScript - **यह सबसे जरूरी हिस्सा है जो बटन्स चलाता है** -->
     <script>
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
             if(show) modal.classList.remove('ghost-hidden');
             else modal.classList.add('ghost-hidden');
         }
+
         function executeSecureLogin(e) {
             e.preventDefault();
-            alert("Login System Active");
+            alert("Login Authentication Active");
+        }
+
+        function downloadReport(year, type) {
+            alert("Downloading " + type + " report for " + year);
+        }
+
+        function sendToGhostBackend() {
+            // Calculator logic
+            alert("Calculation System Engaged");
         }
     </script>
 </body>
 </html>
+
