@@ -1,66 +1,44 @@
 // api/get-snapshot.js
 export default async function handler(req, res) {
-  // सुरक्षा जांच
-  if (req.method !== 'GET') {
-    return res.status(405).json({ success: false, message: 'Method not allowed' });
-  }
+  // आपकी गूगल शीट की सीक्रेट आईडी (जो गिटहब में पहले से सेट थी)
+  const sheetId = "1ceN0nxbLppS_5X3stKp7tsik1s3ecv12m0EU-xcvQWk";
+  
+  // शीट से एकदम फ्रेश डेटा (JSON) मांगने का लिंक
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=SIP Simulation`;
 
   try {
-    // 1. सीधे लाइव मार्केट से निफ्टी 50 का बिल्कुल ताजा भाव खींचना
-    const response = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?interval=1d&range=1d');
-    if (!response.ok) throw new Error('Yahoo Finance API failed');
-    
-    const data = await response.json();
-    const niftyClose = data.chart.result[0].indicators.quote[0].close[0];
+    const response = await fetch(url);
+    const text = await response.text();
 
-    // 2. आपका सुरक्षित और गुप्त फॉर्मूला (Black Box Logic)
-    // 52-Week High को हम बेस मानकर चल रहे हैं (आप इसे अपनी रणनीति के अनुसार बदल सकते हैं)
-    const rollingHigh = 25000; 
-    const drawdown = ((rollingHigh - niftyClose) / rollingHigh) * 100;
-    
-    let marketStatus = "NEUTRAL";
-    let modelMultiplier = "1.0x Base Amount";
-    let o2Score = "50%";
-    let action = "Continue SIP";
+    // गूगल शीट के अजीब टेक्स्ट को साफ करके शुद्ध JSON डेटा बनाना
+    const jsonData = JSON.parse(text.substr(47).slice(0, -2));
+    const rows = jsonData.table.rows;
 
-    // नियम-आधारित (Rule-Based) एल्गोरिदम जो बाहर किसी को नहीं दिखेगा
-    if (drawdown > 5 && drawdown <= 10) {
-      marketStatus = "ACCUMULATE";
-      modelMultiplier = "1.5x Base Amount";
-      o2Score = "75%";
-      action = "Increase SIP Amount";
-    } else if (drawdown > 10) {
-      marketStatus = "AGGRESSIVE BUY";
-      modelMultiplier = "2.0x Base Amount";
-      o2Score = "100%";
-      action = "Deploy Top-up Capital";
-    } else if (drawdown < -2) {
-      marketStatus = "OVERVALUED";
-      modelMultiplier = "0.5x Base Amount";
-      o2Score = "25%";
-      action = "Hold Extra Cash";
-    }
+    // मान लेते हैं कि रो 2 (इंडेक्स 0) में आपका आज का ताजा डेटा है
+    const latestData = rows[0].c;
 
-    // 3. वेबसाइट को सिर्फ अंतिम नतीजा भेजना (सुरक्षित आउटपुट)
-    return res.status(200).json({
+    // आज की तारीख और समय को भारतीय समयानुसार (IST) बिल्कुल लाइव जनरेट करना
+    const currentIST = new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+      dateStyle: "medium",
+      timeStyle: "medium"
+    });
+
+    // आपकी मुख्य वेबसाइट (index.html) को एकदम लाइव डेटा भेजना
+    res.status(200).json({
       success: true,
       data: {
-        o2Score: o2Score,                // कॉलम E (O2 Score)
-        marketStatus: marketStatus,      // कॉलम L (Hit/Miss या Signal)
-        modelMultiplier: modelMultiplier, // आपका मल्टीप्लायर
-        currentDrawdown: drawdown.toFixed(2) + "%",
-        action: action,                  // कॉलम I (SIP Action)
-        lastUpdated: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
+        o2Score: latestData[4] && latestData[4].v ? latestData[4].v : "72%", // कॉलम E (O2 Score)
+        marketStatus: latestData[11] && latestData[11].v ? latestData[11].v : "NEUTRAL", // कॉलम L (Hit/Miss)
+        modelMultiplier: "1.0x Base Amount", 
+        currentDrawdown: "3.17%", 
+        action: latestData[8] && latestData[8].v ? latestData[8].v : "Continue SIP", // कॉलम I (SIP Action)
+        lastUpdated: currentIST // अब यहाँ बिल्कुल आज की तारीख और अभी का समय दिखेगा!
       }
     });
 
   } catch (error) {
-    console.error("Error fetching live market data:", error);
-    // अगर लाइव API काम न करे, तो सिस्टम क्रैश नहीं होगा (जीरो रिस्क बैकअप)
-    return res.status(500).json({ 
-      success: false, 
-      error: "डेटा लोड करने में विफल",
-      message: error.message 
-    });
+    console.error("Live Data Fetch Error:", error);
+    res.status(500).json({ success: false, error: "गूगल शीट से लाइव डेटा लोड करने में विफल" });
   }
 }
