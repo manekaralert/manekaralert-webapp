@@ -1,79 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta name="google-site-verification" content="sCRXSyMZ5n3L1gw0cKHHoODD3m5RIkmA4FojuSGJWTo" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manekar Alert - Rule-Based Market Intelligence</title>
+
+    <meta name="description" content="Manekar Alert is a Rule-Based Market Intelligence Platform designed for disciplined SIP investors. Educational market insights, historical validation and transparent multi-factor analysis.">
+    <meta name="keywords" content="Manekar Alert,SIP,Market Intelligence,NIFTY,SIP Investing,Rule Based Investing,Educational Market Platform,India">
+    <meta name="author" content="Manekar Alert">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b2240">
+
+    <link class="favicon-node" rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         html { scroll-behavior: smooth; }
         .ghost-hidden { display: none !important; }
         .theme-trust-gradient { background: linear-gradient(135deg, #062c43 0%, #051c2c 100%); }
     </style>
 </head>
+
 <body class="bg-[#0b2240] text-white font-sans">
 
-    <header class="bg-[#081a33] border-b border-gray-800 sticky top-0 z-50">
+    <header class="bg-[#081a33] border-b border-gray-800 sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-            <h1 class="text-2xl font-bold">Manekar Alert</h1>
-            <nav class="hidden md:flex gap-6 font-semibold">
-                <a href="#calculator-section" class="hover:text-green-400">Calculator</a>
-                <a href="#validation" class="hover:text-green-400">Validation</a>
-                <a href="#pricing" class="hover:text-green-400">Pricing</a>
-                <button onclick="toggleModal('loginModal', true)" class="bg-blue-600 px-4 py-2 rounded-lg text-sm">Login</button>
+            <div class="flex items-center gap-3">
+                <img src="/logo.png" alt="Manekar Alert Logo" class="w-14 h-14 rounded-lg shadow">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wide">Manekar Alert</h1>
+                    <p class="text-xs text-gray-400">Rule-Based Market Intelligence</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center gap-8 font-semibold">
+                <a href="#home" class="hover:text-green-400 transition duration-300">Home</a>
+                <a href="#calculator-section" class="hover:text-green-400 transition duration-300">Hybrid Calculator</a>
+                <a href="#validation" class="hover:text-green-400 transition duration-300">Validation</a>
+                <a href="#snapshot" class="hover:text-green-400 transition duration-300">Snapshot</a>
+                <a href="#pricing" class="hover:text-green-400 transition duration-300">Pricing</a>
+                <button onclick="toggleModal('loginModal', true)" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm font-bold transition duration-300 uppercase tracking-wide">Investor Login</button>
             </nav>
         </div>
     </header>
 
-    <section id="calculator-section" class="py-20 px-6 max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Hybrid Mathematical Sandbox</h2>
-        <div class="bg-[#081a33] p-8 rounded-xl border border-gray-800">
-            <input type="number" id="high-val" placeholder="52-Week High" class="w-full mb-4 bg-[#0b2240] p-3 rounded border border-gray-700">
-            <input type="number" id="close-val" placeholder="Current Close" class="w-full mb-4 bg-[#0b2240] p-3 rounded border border-gray-700">
-            <button onclick="sendToGhostBackend()" class="w-full bg-emerald-600 py-3 rounded-lg font-bold">Calculate Drawdown</button>
-            <div id="out-drawdown" class="mt-4 text-emerald-400 font-mono text-xl"></div>
-        </div>
-    </section>
-
-    <section id="pricing" class="py-16 px-6 bg-[#081a33] scroll-mt-20">
-        <h2 class="text-4xl font-bold text-center mb-2">Simple Pricing Architecture</h2>
-        <p class="text-gray-400 text-center mb-12">Strictly limited to 5,000 long-term investors.</p>
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-            <div class="bg-[#0b2240] p-8 rounded-xl border border-gray-700">
-                <h3 class="text-emerald-400 font-bold text-xl">Free Vault</h3>
-                <div class="text-3xl font-bold my-4">₹0</div>
-            </div>
-            <div class="bg-blue-900/30 rounded-xl border-2 border-blue-500 p-8 shadow-2xl relative">
-                <h3 class="text-blue-400 font-bold text-xl">Premium Node</h3>
-                <div class="text-3xl font-bold my-4 text-white">₹999 <span class="text-sm font-normal text-gray-400">/year</span></div>
-                <button onclick="toggleModal('loginModal', true)" class="w-full bg-blue-600 py-3 rounded-lg font-bold">Join Premium</button>
-            </div>
-        </div>
-    </section>
-
     <div id="loginModal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 ghost-hidden px-4">
-        <div class="bg-[#081a33] border border-gray-800 rounded-2xl w-full max-w-md p-8 relative">
-            <button onclick="toggleModal('loginModal', false)" class="absolute top-4 right-4">✕</button>
+        <div class="bg-[#081a33] border border-gray-800 rounded-2xl w-full max-w-md p-8 relative shadow-2xl">
+            <button onclick="toggleModal('loginModal', false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">✕</button>
+            <h3 class="text-xl font-bold mb-1 text-center text-blue-400">Secure Investor Authentication</h3>
+            <p class="text-xs text-gray-400 text-center mb-6">Isolated server-side encrypted gateway</p>
+
             <form onsubmit="executeSecureLogin(event)" class="space-y-4">
-                <input type="email" placeholder="Email" class="w-full bg-[#0b2240] p-2 rounded">
-                <button type="submit" class="w-full bg-blue-600 py-3 rounded-lg font-bold">Verify Access</button>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Registered Email ID</label>
+                    <input type="email" id="login-email" required class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Password</label>
+                    <input type="password" id="login-pass" required class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 text-sm">
+                </div>
+
+                <div class="flex items-start gap-3 p-3 bg-[#051426] rounded-lg border border-gray-800 mt-2">
+                    <input type="checkbox" required id="legal-gate-check" class="mt-1 bg-[#0b2240] border-gray-700 text-blue-600 rounded">
+                    <label for="legal-gate-check" class="text-[10px] text-gray-400 leading-relaxed">
+                        I hereby confirm that I am accessing mathematical index calculations for educational purposes. I understand that this system does not generate financial signals, buy/sell recommendations, or advisory mandates.
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-bold text-xs uppercase tracking-wider shadow-lg">Verify & Request Access</button>
             </form>
         </div>
     </div>
 
-    <script>
-        function toggleModal(id, show) {
-            document.getElementById(id).classList.toggle('ghost-hidden', !show);
-        }
-        function sendToGhostBackend() {
-            const high = document.getElementById('high-val').value;
-            const close = document.getElementById('close-val').value;
-            if(high && close) {
-                const drawdown = ((high - close) / high * 100).toFixed(2);
-                document.getElementById('out-drawdown').innerText = "Result: " + drawdown + "%";
-            }
-        }
-        function executeSecureLogin(e) { e.preventDefault(); alert("System Engaged"); }
-    </script>
-</body>
-</html>
+    <section id="home" class="bg-gradient-to-b from-[#0b2240] via-[#102c52] to-[#081a33] py-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                Rule-Based<br>Market Intelligence
+            </h2>
+            <p class="text-green-400 text-xl font-semibold mb-5">Built for Long-Term SIP Investors</p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-10">
+                Manekar Alert helps disciplined SIP investors using a transparent Rule-Based Multi-Factor Model with educational market intelligence.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-5 mb-10">
+                <a href="#calculator-section" class="bg-[#00a86b] hover:bg-[#009f64] px-8 py-3 rounded-lg font-bold shadow-lg transition text-center">Start Sandbox Test</a>
+                <button onclick="toggleModal('loginModal', true)" class="border-2 border-white hover:bg-white hover:text-[#0b2240] px-8 py-3 rounded-lg font-bold transition">Investor Login</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 -mt-12 mb-20 relative z-10">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-[#081a33] border border-gray-800 rounded-xl p-6 shadow-lg">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-bold mb-3">Rule-Based Analysis</h3>
+                <p class="text-gray-400 text-sm">Transparent market intelligence based on predefined educational rules.</p>
+            </div>
+            <div class="bg-[#081a33] border border-gray-800 rounded-xl p-6 shadow-lg">
+                <div class="text-4xl mb-4">📈</div>
+                <h3 class="text-xl font-bold mb-3">Historical Validation</h3>
+                <p class="text-gray-400 text-sm">Historical market cycle analysis for long-term SIP education.</p>
+            </div>
+            <div class="bg-[#081a33] border border-gray-800 rounded-xl p-6 shadow-lg">
+                <div class="text-4xl mb-4">🔔</div>
+                <h3 class="text-xl font-bold mb-3">Market Awareness</h3>
+                <p class="text-gray-400 text-sm">Educational notifications designed for disciplined SIP investors.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator-section" class="max-w-7xl mx-auto py-12 px-6 grid lg:grid-cols-3 gap-8 scroll-mt-20">
+        <div class="lg:col-span-2 bg-[#081a33] border border-gray-800 rounded-2xl p-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+                <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                    <span>🧮</span> Hybrid Mathematical Sandbox
+                </h3>
+                <span class="text-[9px] bg-emerald-950 text-emerald-400 border border-emerald-800/60 px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider">Live System Engine</span>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Index 52-Week Rolling High</label>
+                    <input type="number" id="high-val" value="25000" class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500 font-mono text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Index Test Close Value</label>
+                    <input type="number" id="close-val" value="22500" class="w-full bg-[#0b2240] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500 font-mono text-sm">
+                </div>
+            </div>
+
+            <div class="text-center mb-6">
+                <button onclick="sendToGhostBackend()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition shadow-lg">Securely Run Equation</button>
+            </div>
+
+            <div id="output-wrapper" class="theme-trust-gradient p-6 rounded-xl border border-emerald-900/30 space-y-4 shadow-2xl transition-all duration-500">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-[#081a33]/80 p-4 rounded-lg border border-gray-800">
+                        <span class="text-[10px] text-gray-400 block mb-1 uppercase tracking-wide">Mathematical Drawdown</span>
+                        <strong id="out-drawdown" class="text-2xl text-emerald-400 font-bold font-mono">0.00%</strong>
+                    </div>
+                    <div class="bg-[#081a33]/80 p-4 rounded-lg border border-gray-800">
+                        <span class="text-[10px] text-gray-400 block mb-1 uppercase tracking-wide">Processed Bracket</span>
+                        <strong id="out-bracket" class="text-base text-yellow-500 font-bold">NEUTRAL</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#081a33] border border-gray-800 rounded-2xl p-6 shadow-2xl flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-4">
+                    <h3 class="text-base font-bold text-blue-400 flex items-center gap-2">
+                        <span>📳</span> Encrypted Routing Hub
+                    </h3>
+                    <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                </div>
+                <div class="space-y-3 text-xs text-gray-400 leading-relaxed font-mono">
+                    <div class="p-3 bg-emerald-950/20 border border-emerald-900/30 rounded-xl">
+                        <span class="text-emerald-400 font-bold block text-[10px] mb-1">ROUTE: INDIA (WhatsApp Hub)</span>
+                        "Auto-sync enabled. System active for EOD 18:00 IST calculation pushes."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌟 व्यावसायिक ऐतिहासिक रिपोर्ट सेक्शन (फ्री यूजर के लिए टाइम-गेट के साथ) -->
+    <section id="validation" class="max-w-6xl mx-auto py-16 px-6 scroll-mt-20">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-bold mb-3 tracking-wide">Historical Validation Engine</h2>
+            <p class="text-sm text-gray-400">Complimentary Educational Archives for Smart Vault Users (2020 - 2025)</p>
+        </div>
+
+        <div class="bg-[#081a33] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-[#0c2447] text-gray-300 border-b border-gray-800 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="px-6 py-4">Financial Year</th>
+                            <th class="px-6 py-4">Validation Intelligence</th>
+                            <th class="px-6 py-4">Profit-Curve Analytics</th>
+                            <th class="px-6 py-4">Simulation Grid</th>
+                            <th class="px-6 py-4 text-center">Vault Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800/60 font-mono">
+                        <tr class="hover:bg-[#0b2240]/40 transition duration-150">
+                            <td class="px-6 py-4 font-bold text-white">FY 2020</td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2020, 'Validation')" id="btn-val-2020" class="text-blue-400 hover:underline text-xs flex items-center gap-1">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2020, 'Profit')" id="btn-prof-2020" class="text-blue-400 hover:underline text-xs flex items-center gap-1">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2020, 'Simulation')" id="btn-sim-2020" class="text-blue-400 hover:underline text-xs flex items-center gap-1">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center" id="status-2020">
+                                <span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-[#0b2240]/40 transition duration-150">
+                            <td class="px-6 py-4 font-bold text-white">FY 2021</td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2021, 'Validation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2021, 'Profit')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2021, 'Simulation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center"><span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span></td>
+                        </tr>
+                        <tr class="hover:bg-[#0b2240]/40 transition duration-150">
+                            <td class="px-6 py-4 font-bold text-white">FY 2022</td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2022, 'Validation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2022, 'Profit')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2022, 'Simulation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center"><span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span></td>
+                        </tr>
+                        <tr class="hover:bg-[#0b2240]/40 transition duration-150">
+                            <td class="px-6 py-4 font-bold text-white">FY 2023</td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2023, 'Validation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2023, 'Profit')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2023, 'Simulation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center"><span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span></td>
+                        </tr>
+                        <tr class="hover:bg-[#0b2240]/40 transition duration-150">
+                            <td class="px-6 py-4 font-bold text-white">FY 2024</td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2024, 'Validation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2024, 'Profit')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2024, 'Simulation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center"><span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span></td>
+                        </tr>
+                        <tr class="hover:bg-[#0b2240]/40 transition duration-150">
+                            <td class="px-6 py-4 font-bold text-white">FY 2025</td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Validation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Profit')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Simulation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center"><span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🎯 टुडे लाइव मार्केट स्नैपशॉट -->
+    <section id="snapshot" class="max-w-2xl mx-auto py-16 px-6 scroll-mt-20">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
+            <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Live Market Snapshot</h3>
+
+            <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-xs font-bold text-gray-600">
+                    <span>SIP Score</span>
+                    <span id="snap-sip-score">--</span>
+                </div>
+                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                    <div id="snap-progress-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="divide-y divide-gray-100">
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Market Status (Signal)</span>
+                    <strong id="snap-market-status" class="text-gray-800">Loading...</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Model Multiplier</span>
+                    <strong id="snap-multiplier" class="text-gray-800">--</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">52-Week High</span>
+                   
