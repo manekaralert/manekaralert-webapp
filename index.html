@@ -248,5 +248,283 @@
                             <td class="px-6 py-4 font-bold text-white">FY 2025</td>
                             <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Validation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
                             <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Profit')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
-                            <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Simulation')" class="t
-                   
+                            <td class="px-6 py-4"><button onclick="downloadReport(2025, 'Simulation')" class="text-blue-400 hover:underline text-xs">📥 Download PDF</button></td>
+                            <td class="px-6 py-4 text-center"><span class="bg-emerald-950 text-emerald-400 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide border border-emerald-900/60">🔓 Unlocked</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🎯 टुडे लाइव मार्केट स्नैपशॉट -->
+    <section id="snapshot" class="max-w-2xl mx-auto py-16 px-6 scroll-mt-20">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
+            <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Live Market Snapshot</h3>
+
+            <div id="snapshot-error" class="ghost-hidden bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg px-4 py-2 mb-4">Unable to load live data right now.</div>
+
+            <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-xs font-bold text-gray-600">
+                    <span>SIP Score</span>
+                    <span id="snap-sip-score">--</span>
+                </div>
+                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                    <div id="snap-progress-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="divide-y divide-gray-100">
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Market Status (Signal)</span>
+                    <strong id="snap-market-status" class="text-gray-800">Loading...</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Model Multiplier</span>
+                    <strong id="snap-multiplier" class="text-gray-800">--</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">52-Week High</span>
+                    <strong id="snap-52w-high" class="text-gray-800">--</strong>
+                </div>
+                <div class="flex justify-between py-3 text-sm">
+                    <span class="text-gray-600">Last Close</span>
+                    <strong id="snap-last-close" class="text-gray-800">--</strong>
+                </div>
+            </div>
+            <p class="text-[10px] text-gray-400 mt-6 leading-relaxed">
+                For educational awareness only. Not investment advice. Data updated post EOD 18:00 IST.
+            </p>
+        </div>
+    </section>
+
+    <!-- 💰 Pricing -->
+    <section id="pricing" class="py-16 px-6 bg-[#081a33] scroll-mt-20">
+        <h2 class="text-4xl font-bold text-center mb-2">Simple Pricing Architecture</h2>
+        <p class="text-gray-400 text-center mb-12">Strictly limited to 5,000 long-term investors.</p>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <div class="bg-[#0b2240] p-8 rounded-xl border border-gray-700">
+                <h3 class="text-emerald-400 font-bold text-xl">Free Vault</h3>
+                <div class="text-3xl font-bold my-4">₹0</div>
+            </div>
+            <div class="bg-blue-900/30 rounded-xl border-2 border-blue-500 p-8 shadow-2xl relative">
+                <h3 class="text-blue-400 font-bold text-xl">Premium Node</h3>
+                <div class="text-3xl font-bold my-4 text-white">₹999 <span class="text-sm font-normal text-gray-400">/year</span></div>
+                <button onclick="toggleModal('loginModal', true)" class="w-full bg-blue-600 py-3 rounded-lg font-bold">Join Premium</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#051426] py-8 px-6 text-center text-xs text-gray-500">
+        © 2026 Manekar Alert. Educational awareness platform only. Not investment advice. SEBI compliant design.
+    </footer>
+
+    <script>
+        // =====================================================
+        // CONFIG — update these once your backend endpoints exist
+        // =====================================================
+        const API_BASE = "/api"; // e.g. Vercel serverless functions under /api/*
+
+        // ---- Modal control ----
+        function toggleModal(id, show) {
+            document.getElementById(id).classList.toggle('ghost-hidden', !show);
+        }
+
+        // ---- Sandbox calculator: drawdown + bracket classification ----
+        function sendToGhostBackend() {
+            const high = parseFloat(document.getElementById('high-val').value);
+            const close = parseFloat(document.getElementById('close-val').value);
+            if (!high || !close || high <= 0) return;
+
+            const drawdown = ((high - close) / high * 100);
+            document.getElementById('out-drawdown').innerText = drawdown.toFixed(2) + "%";
+
+            let bracket = "NEUTRAL";
+            let colorClass = "text-yellow-500";
+            if (drawdown >= 20) { bracket = "AGGRESSIVE"; colorClass = "text-red-400"; }
+            else if (drawdown >= 15) { bracket = "STRONG"; colorClass = "text-orange-400"; }
+            else if (drawdown >= 10) { bracket = "WATCH"; colorClass = "text-blue-400"; }
+
+            const bracketEl = document.getElementById('out-bracket');
+            bracketEl.innerText = bracket;
+            bracketEl.className = "text-base font-bold " + colorClass;
+        }
+
+        // =====================================================
+        // AUTH / SESSION
+        // =====================================================
+
+        // Restore session on page load
+        function initSession() {
+            const token = localStorage.getItem('manekar_token');
+            const email = localStorage.getItem('manekar_email');
+            if (token && email) {
+                setLoggedInUI(email);
+            }
+        }
+
+        function setLoggedInUI(email) {
+            document.getElementById('nav-login-btn').classList.add('ghost-hidden');
+            document.getElementById('nav-logout-btn').classList.remove('ghost-hidden');
+        }
+
+        function setLoggedOutUI() {
+            document.getElementById('nav-login-btn').classList.remove('ghost-hidden');
+            document.getElementById('nav-logout-btn').classList.add('ghost-hidden');
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('manekar_token');
+            localStorage.removeItem('manekar_email');
+            localStorage.removeItem('manekar_tier');
+            setLoggedOutUI();
+        }
+
+        function isLoggedIn() {
+            return !!localStorage.getItem('manekar_token');
+        }
+
+        // ---- Toggle between Login and Signup inside the same modal ----
+        let isSignupMode = false;
+        function toggleSignupMode() {
+            isSignupMode = !isSignupMode;
+            document.getElementById('login-submit-btn').innerText = isSignupMode
+                ? "Create Account"
+                : "Verify & Request Access";
+            document.getElementById('signup-toggle-link').innerText = isSignupMode
+                ? "Already have an account? Login"
+                : "Create an account";
+            document.querySelector('#loginModal h3').innerText = isSignupMode
+                ? "Create Investor Account"
+                : "Secure Investor Authentication";
+        }
+
+        // ---- Login / Signup handler ----
+        // Calls POST /api/login or POST /api/signup depending on mode.
+        // Both endpoints are live and connected to MongoDB via MONGODB_URI.
+        async function executeSecureLogin(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-pass').value;
+            const errorBox = document.getElementById('login-error');
+            const submitBtn = document.getElementById('login-submit-btn');
+
+            errorBox.classList.add('ghost-hidden');
+
+            // Basic client-side validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                errorBox.innerText = "कृपया सही email address डालें।";
+                errorBox.classList.remove('ghost-hidden');
+                return;
+            }
+            if (password.length < 6) {
+                errorBox.innerText = "Password कम से कम 6 अक्षर का होना चाहिए।";
+                errorBox.classList.remove('ghost-hidden');
+                return;
+            }
+
+            const endpoint = isSignupMode ? "/signup" : "/login";
+            submitBtn.disabled = true;
+            submitBtn.innerText = isSignupMode ? "Creating account..." : "Verifying...";
+
+            try {
+                const res = await fetch(API_BASE + endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    errorBox.innerText = data.error || "Something went wrong. Please try again.";
+                    errorBox.classList.remove('ghost-hidden');
+                    return;
+                }
+
+                if (isSignupMode) {
+                    // Account created — switch back to login mode so they can sign in
+                    toggleSignupMode();
+                    errorBox.classList.remove('ghost-hidden');
+                    errorBox.className = "bg-emerald-950/50 border border-emerald-800 text-emerald-400 text-xs rounded-lg px-4 py-2 mb-4";
+                    errorBox.innerText = "Account बन गया! अब login करें।";
+                    return;
+                }
+
+                // Successful login
+                localStorage.setItem('manekar_token', data.token);
+                localStorage.setItem('manekar_email', data.email);
+                localStorage.setItem('manekar_tier', data.tier || 'free');
+                setLoggedInUI(data.email);
+                toggleModal('loginModal', false);
+
+            } catch (err) {
+                errorBox.className = "bg-red-950/50 border border-red-800 text-red-400 text-xs rounded-lg px-4 py-2 mb-4";
+                errorBox.innerText = "Server से connect नहीं हो पाया। कृपया थोड़ी देर बाद कोशिश करें।";
+                errorBox.classList.remove('ghost-hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = isSignupMode ? "Create Account" : "Verify & Request Access";
+            }
+        }
+
+        // =====================================================
+        // LIVE SNAPSHOT
+        // =====================================================
+        // NOTE: This calls GET /api/snapshot which you still need to build.
+        // It should return JSON like:
+        // { sipScore: 62, marketStatus: "WATCH", multiplier: "1.25x",
+        //   high52w: "25,847", lastClose: "23,910" }
+        async function loadSnapshot() {
+            const errorBox = document.getElementById('snapshot-error');
+            errorBox.classList.add('ghost-hidden');
+            try {
+                const res = await fetch(API_BASE + "/get-snapshot");
+                if (!res.ok) throw new Error("bad response");
+                const data = await res.json();
+
+                document.getElementById('snap-sip-score').innerText = data.sipScore ?? '--';
+                document.getElementById('snap-progress-bar').style.width = (data.sipScore || 0) + '%';
+                document.getElementById('snap-market-status').innerText = data.marketStatus ?? '--';
+                document.getElementById('snap-multiplier').innerText = data.multiplier ?? '--';
+                document.getElementById('snap-52w-high').innerText = data.high52w ?? '--';
+                document.getElementById('snap-last-close').innerText = data.lastClose ?? '--';
+
+            } catch (err) {
+                // Expected until /api/snapshot exists
+                document.getElementById('snap-market-status').innerText = "Unavailable";
+                errorBox.classList.remove('ghost-hidden');
+            }
+        }
+
+        // =====================================================
+        // REPORT DOWNLOADS
+        // =====================================================
+        // NOTE: Update REPORT_BASE_URL once your PDFs are hosted
+        // (e.g. Vercel /public/reports/ or a cloud storage bucket).
+        const REPORT_BASE_URL = "/reports";
+
+        function downloadReport(year, type) {
+            // FY2020 is free for everyone. Other years require a "premium" tier account.
+            const tier = localStorage.getItem('manekar_tier');
+            if (year !== 2020 && tier !== 'premium') {
+                toggleModal('loginModal', true);
+                return;
+            }
+            const fileName = `${year}-${type.toLowerCase()}.pdf`;
+            const url = `${REPORT_BASE_URL}/${fileName}`;
+            window.open(url, "_blank");
+        }
+
+        // =====================================================
+        // INIT
+        // =====================================================
+        document.addEventListener('DOMContentLoaded', function () {
+            initSession();
+            loadSnapshot();
+        });
+    </script>
+</body>
+</html>
