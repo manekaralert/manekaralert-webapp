@@ -1,48 +1,64 @@
-import { MongoClient } from 'mongodb';
+// api/login.js
+// POST /api/login
+// Body: { email, password }
+// Verifies the user against the MongoDB "users" collection and returns
+// a signed JWT token on success. This is the endpoint index.html's
+// executeSecureLogin() function calls.
 
-// यह आपके मोंगोडीबी का गुप्त कनेक्शन स्ट्रिंग है जो हम वर्सेल सेटिंग्स में डालेंगे
-const uri = process.env.MONGODB_URI; 
-let cachedClient = null;
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { getDb } = require("./_db");
 
-async function connectToDatabase() {
-    if (cachedClient) return cachedClient;
-    const client = new MongoClient(uri);
-    await client.connect();
-    cachedClient = client;
-    return client;
-}
+const JWT_SECRET = process.env.JWT_SECRET;
 
-export default async function handler(req, res) {
-    // सुरक्षा के लिए सिर्फ POST रिक्वेस्ट को अनुमति देंगे
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method not allowed' });
+module.exports = async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  if (!JWT_SECRET) {
+    console.error("JWT_SECRET is not set in environment variables.");
+    return res.status(500).json({ error: "Server misconfigured. Please contact support." });
+  }
+
+  try {
+    const { email, password } = req.body || {};
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required." });
     }
 
-    try {
-        const { email, password } = req.body;
-        const client = await connectToDatabase();
-        const db = client.db('manekaralert_db'); // आपके मोंगोडीबी डेटाबेस का नाम
-        
-        // यूज़र्स कलेक्शन में ईमेल आईडी खोजना
-        const user = await db.collection('users').findOne({ email: email.toLowerCase() });
+    const db = await getDb();
+    const users = db.collection("users");
 
-        if (!user) {
-            return res.status(401).json({ success: false, message: 'इन्वेस्टर रिकॉर्ड नहीं मिला।' });
-        }
+    const normalizedEmail = email.trim().toLowerCase();
+    const user = await users.findOne({ email: normalizedEmail });
 
-        // पासवर्ड मैच करना
-        if (user.password !== password) {
-            return res.status(401).json({ success: false, message: 'गलत पासवर्ड! कृपया दोबारा जांचें।' });
-        }
-
-        // सफलता का रिस्पॉन्स
-        return res.status(200).json({ 
-            success: true, 
-            message: 'Authentication Successful!',
-            user: { email: user.email, name: user.name || 'Investor' } 
-        });
-
-    } catch (error) {
-        return res.status(500).json({ success: false, message: 'सर्वर त्रुटि: ' + error.message });
+    // Same generic error for "no user" and "wrong password" —
+    // avoids leaking which emails are registered.
+    if (!user) {
+      return res.status(401).json({ error: "Invalid email or password." });
     }
-}
+
+    const passwordMatches = await bcrypt.compare(password, user.passwordHash);
+    if (!passwordMatches) {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+
+    const token = jwt.sign(
+      { userId: user._id, email: user.email, tier: user.tier || "free" },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    return res.status(200).json({
+      token,
+      email: user.email,
+      tier: user.tier || "free",
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(500).json({ error: "Something went wrong. Please try again." });
+  }
+};
