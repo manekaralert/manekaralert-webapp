@@ -95,6 +95,17 @@
         </div>
     </div>
 
+    <!-- 🔔 Paid Investor Alert Banner — only shown to logged-in Premium users -->
+    <div id="paid-notification" class="ghost-hidden max-w-4xl mx-auto mt-6 px-6">
+        <div class="bg-gradient-to-r from-emerald-900/60 to-emerald-950/60 border border-emerald-700 rounded-xl p-5 flex items-start gap-4">
+            <span class="text-2xl">🔔</span>
+            <div class="flex-1">
+                <div class="text-xs uppercase tracking-wide text-emerald-400 font-bold mb-1">Premium Alert</div>
+                <div id="paid-notification-text" class="text-sm text-gray-200"></div>
+            </div>
+        </div>
+    </div>
+
     <section id="home" class="bg-gradient-to-b from-[#0b2240] via-[#102c52] to-[#081a33] py-24 px-6 text-center">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
@@ -194,6 +205,8 @@
             <p class="text-sm text-gray-400">Complimentary Educational Archives for Smart Vault Users (2020 - 2025)</p>
         </div>
 
+        <div id="backtest-summary" class="max-w-4xl mx-auto mb-8 grid sm:grid-cols-2 gap-4"></div>
+
         <div class="bg-[#081a33] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse text-sm">
@@ -257,43 +270,25 @@
         </div>
     </section>
 
-    <!-- 🎯 टुडे लाइव मार्केट स्नैपशॉट -->
+    <!-- 🎯 टुडे मार्केट स्नैपशॉट (Free — सिर्फ Close price, कोई sensitive/paid data नहीं) -->
     <section id="snapshot" class="max-w-2xl mx-auto py-16 px-6 scroll-mt-20">
         <div class="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
-            <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Live Market Snapshot</h3>
+            <h3 class="text-2xl font-bold text-[#0b2240] mb-8">Today's Nifty Close</h3>
 
-            <div id="snapshot-error" class="ghost-hidden bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg px-4 py-2 mb-4">Unable to load live data right now.</div>
-
-            <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-xs font-bold text-gray-600">
-                    <span>SIP Score</span>
-                    <span id="snap-sip-score">--</span>
-                </div>
-                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                    <div id="snap-progress-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
-                </div>
-            </div>
+            <div id="snapshot-error" class="ghost-hidden bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg px-4 py-2 mb-4">Unable to load data right now.</div>
 
             <div class="divide-y divide-gray-100">
                 <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">Market Status (Signal)</span>
-                    <strong id="snap-market-status" class="text-gray-800">Loading...</strong>
+                    <span class="text-gray-600">Date</span>
+                    <strong id="snap-date" class="text-gray-800">--</strong>
                 </div>
                 <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">Model Multiplier</span>
-                    <strong id="snap-multiplier" class="text-gray-800">--</strong>
-                </div>
-                <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">52-Week High</span>
-                    <strong id="snap-52w-high" class="text-gray-800">--</strong>
-                </div>
-                <div class="flex justify-between py-3 text-sm">
-                    <span class="text-gray-600">Last Close</span>
+                    <span class="text-gray-600">Nifty Close</span>
                     <strong id="snap-last-close" class="text-gray-800">--</strong>
                 </div>
             </div>
             <p class="text-[10px] text-gray-400 mt-6 leading-relaxed">
-                For educational awareness only. Not investment advice. Data updated post EOD 18:00 IST.
+                For educational awareness only. Not investment advice. Detailed model signals are available to Premium investors only.
             </p>
         </div>
     </section>
@@ -366,11 +361,46 @@
         function setLoggedInUI(email) {
             document.getElementById('nav-login-btn').classList.add('ghost-hidden');
             document.getElementById('nav-logout-btn').classList.remove('ghost-hidden');
+            loadPaidNotification();
         }
 
         function setLoggedOutUI() {
             document.getElementById('nav-login-btn').classList.remove('ghost-hidden');
             document.getElementById('nav-logout-btn').classList.add('ghost-hidden');
+            document.getElementById('paid-notification').classList.add('ghost-hidden');
+        }
+
+        // ---- Paid Premium Alert Banner ----
+        // Calls /api/notification-latest with the saved JWT. Only shows a banner
+        // when the Sheet's rule/condition has actually fired (ruleTriggered: true
+        // on the backend) — stays hidden during normal NEUTRAL periods.
+        async function loadPaidNotification() {
+            const token = localStorage.getItem('manekar_token');
+            const tier = localStorage.getItem('manekar_tier');
+            const banner = document.getElementById('paid-notification');
+
+            if (!token || tier !== 'premium') {
+                banner.classList.add('ghost-hidden');
+                return;
+            }
+
+            try {
+                const res = await fetch(API_BASE + "/notification-latest", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.active) {
+                    banner.classList.add('ghost-hidden');
+                    return;
+                }
+
+                document.getElementById('paid-notification-text').innerText =
+                    `${data.date} — Market Condition: ${data.signal} | Nifty Close: ${data.close} | Correction: ${data.correctionPct}% | SIP Action: ${data.sipAction}`;
+                banner.classList.remove('ghost-hidden');
+            } catch (err) {
+                banner.classList.add('ghost-hidden');
+            }
         }
 
         function logoutUser() {
@@ -471,12 +501,11 @@
         }
 
         // =====================================================
-        // LIVE SNAPSHOT
+        // FREE MARKET SNAPSHOT (public — Date + Close ONLY)
         // =====================================================
-        // NOTE: This calls GET /api/snapshot which you still need to build.
-        // It should return JSON like:
-        // { sipScore: 62, marketStatus: "WATCH", multiplier: "1.25x",
-        //   high52w: "25,847", lastClose: "23,910" }
+        // Correction %, Market Condition, and SIP Action are paid-only
+        // data and must NEVER be exposed here. See /api/notification-latest
+        // for the paid version, gated behind login + premium tier.
         async function loadSnapshot() {
             const errorBox = document.getElementById('snapshot-error');
             errorBox.classList.add('ghost-hidden');
@@ -485,16 +514,11 @@
                 if (!res.ok) throw new Error("bad response");
                 const data = await res.json();
 
-                document.getElementById('snap-sip-score').innerText = data.sipScore ?? '--';
-                document.getElementById('snap-progress-bar').style.width = (data.sipScore || 0) + '%';
-                document.getElementById('snap-market-status').innerText = data.marketStatus ?? '--';
-                document.getElementById('snap-multiplier').innerText = data.multiplier ?? '--';
-                document.getElementById('snap-52w-high').innerText = data.high52w ?? '--';
+                document.getElementById('snap-date').innerText = data.date ?? '--';
                 document.getElementById('snap-last-close').innerText = data.lastClose ?? '--';
 
             } catch (err) {
-                // Expected until /api/snapshot exists
-                document.getElementById('snap-market-status').innerText = "Unavailable";
+                document.getElementById('snap-last-close').innerText = "Unavailable";
                 errorBox.classList.remove('ghost-hidden');
             }
         }
@@ -519,11 +543,62 @@
         }
 
         // =====================================================
+        // FREE ROLLING BACKTEST REPORT (2020–2025, rolling window)
+        // =====================================================
+        // Fetches real year-by-year signal counts + opportunity rate
+        // from /api/backtest-report (which pulls from your Google Sheet).
+        async function loadBacktestReport() {
+            const container = document.getElementById('backtest-summary');
+            try {
+                const res = await fetch(API_BASE + "/backtest-report");
+                if (!res.ok) throw new Error("bad response");
+                const data = await res.json();
+
+                if (!data.years || data.years.length === 0) {
+                    container.innerHTML = '<p class="col-span-full text-xs text-gray-500">Historical data will appear here once available.</p>';
+                    return;
+                }
+
+                container.innerHTML = data.years.map(y => {
+                    const v = y.validation;
+                    const p = y.profitValidation;
+                    const s = y.sipSimulation;
+                    return `
+                    <div class="bg-[#081a33] border border-gray-800 rounded-xl p-5 text-left">
+                        <div class="text-lg font-bold text-emerald-400 mb-3">FY ${y.year}</div>
+
+                        <div class="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Validation Report</div>
+                        <div class="text-sm mb-3">Opportunity Rate: <strong class="text-white">${v.opportunityRatePct}%</strong>
+                            <div class="text-xs text-gray-400 mt-1">Neutral ${v.neutralCount} · Watch ${v.watchCount} · Strong ${v.strongCount} · Aggressive ${v.aggressiveCount}</div>
+                        </div>
+
+                        <div class="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Profit Validation (Win Rate / Avg Return)</div>
+                        <div class="text-xs text-gray-300 mb-3 space-y-0.5">
+                            <div>Watch: ${p.watch.winRatePct ?? '--'}% win · ${p.watch.avgReturnPct ?? '--'}% avg</div>
+                            <div>Strong: ${p.strong.winRatePct ?? '--'}% win · ${p.strong.avgReturnPct ?? '--'}% avg</div>
+                            <div>Aggressive: ${p.aggressive.winRatePct ?? '--'}% win · ${p.aggressive.avgReturnPct ?? '--'}% avg</div>
+                        </div>
+
+                        <div class="text-[10px] uppercase tracking-wide text-gray-500 mb-1">SIP Simulation</div>
+                        ${s ? `
+                        <div class="text-xs text-gray-300 space-y-0.5">
+                            <div>Regular Return: ${s.returnPctRegular}% (XIRR ${s.xirrRegular ?? '--'}%)</div>
+                            <div>Rule-Based Return: ${s.returnPctRule}% (XIRR ${s.xirrRule ?? '--'}%)</div>
+                        </div>` : '<div class="text-xs text-gray-500">Not enough data</div>'}
+                    </div>`;
+                }).join('');
+            } catch (err) {
+                container.innerHTML = '<p class="col-span-full text-xs text-gray-500">Unable to load backtest summary right now.</p>';
+            }
+        }
+
+        // =====================================================
         // INIT
         // =====================================================
         document.addEventListener('DOMContentLoaded', function () {
             initSession();
             loadSnapshot();
+            loadBacktestReport();
         });
     </script>
 </body>
