@@ -23,17 +23,27 @@ function parseDate(val) {
     if (val.includes("T") || /^\d{4}-\d{2}-\d{2}$/.test(val)) {
       return new Date(val);
     }
-    // "DD/MM/YYYY" format (your actual sheet format, e.g. "31/12/2020")
+    // "DD/MM/YYYY" format (e.g. "31/12/2020")
     if (val.includes("/")) {
       const parts = val.split("/");
       if (parts.length === 3) {
         return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
       }
     }
-    // "DD-MM-YYYY" format (fallback, dash-separated)
+    // "DD-MMM-YYYY" format with month NAME (e.g. "31-Dec-2021")
+    const monthNameMatch = val.match(/^(\d{1,2})-([A-Za-z]{3})-(\d{4})$/);
+    if (monthNameMatch) {
+      const [, day, monthStr, yr] = monthNameMatch;
+      const months = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+      const monthIdx = months[monthStr];
+      if (monthIdx !== undefined) {
+        return new Date(parseInt(yr), monthIdx, parseInt(day));
+      }
+    }
+    // "DD-MM-YYYY" format, numeric (fallback, dash-separated)
     if (val.includes("-")) {
       const parts = val.split("-");
-      if (parts.length === 3) {
+      if (parts.length === 3 && !isNaN(parts[0]) && !isNaN(parts[1])) {
         return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
       }
     }
@@ -121,7 +131,7 @@ module.exports = async function handler(req, res) {
 
     const currentYear = new Date().getFullYear();
     const lastCompletedYear = currentYear - 1;
-    const windowStart = lastCompletedYear - 4;
+    const windowStart = lastCompletedYear - 5; // 6-year rolling window (e.g. 2020–2025)
 
     const years = [];
 
